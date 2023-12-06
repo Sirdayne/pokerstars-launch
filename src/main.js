@@ -3,9 +3,9 @@ import './style.css'
 import App from './App.vue'
 
 const GET_EVENTS = {
-    // The game will be paused - the whole UI will be disabled!
+    // Launch game event from xt to our client, after it redirect to game
     LAUNCH: 'xc2rgLaunchGame',
-    // The game will be resumed to the state before it has been paused.
+    // Here will be custom events
     CUSTOM: 'xc2rgCustomName',
 };
 
