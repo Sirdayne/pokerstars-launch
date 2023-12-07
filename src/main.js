@@ -23,9 +23,24 @@ function onCasinoMessage(eventData) {
         }
     }
 
+    const redirectGame = (message) => {
+        const body = message && message.keysAndValues ? message.keysAndValues : {};
+        const url = `https://int.bgaming-systems.com/pokerstars/pokerstars-stg/launch`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
+        }).then(res => res.json()).then(data => {
+            console.log(data, ' DATA from Pokerstars launch');
+        })
+    }
+
     switch (message.msgId) {
         case GET_EVENTS.LAUNCH:
-            console.log(message.keysAndValues, 'launch event')
+            console.log(message.keysAndValues, 'post message: launch event');
+            redirectGame(message);
             break;
         case GET_EVENTS.CUSTOM:
             console.log('custom event')

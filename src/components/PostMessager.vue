@@ -15,7 +15,7 @@ const message = {
     "countryCode": "AG",
     "playForFun": true,
     "soundEnabled": true,
-    "vendorGameConfig": "SEVENLUCKYDWARFS",
+    "vendorGameConfig": "MultihandBlackjack",
     "showPlayMoneyWithDecimal": true
   }
 };
