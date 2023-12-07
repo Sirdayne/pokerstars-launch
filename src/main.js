@@ -23,9 +23,16 @@ function onCasinoMessage(eventData) {
         }
     }
 
-    const redirectGame = (message) => {
+    const redirectToGame = (data) => {
+        const url = data && data.url ? data.url : '';
+        if (url) {
+            window.location.href = url;
+        }
+    }
+
+    const fetchGameUrl = (message) => {
         const body = message && message.keysAndValues ? message.keysAndValues : {};
-        const url = `https://int.bgaming-systems.com/pokerstars/pokerstars-stg/launch`;
+        const url = `${import.meta.env.VITE_APP_HOST}/pokerstars/pokerstars-stg/launch`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -34,15 +41,19 @@ function onCasinoMessage(eventData) {
             body: JSON.stringify(body)
         }).then(res => res.json()).then(data => {
             console.log(data, ' DATA from Pokerstars launch');
+            redirectToGame(data);
         }).catch((error) => {
             console.log('Fetch Error: ', error)
+            const data = {"url": `${import.meta.env.VITE_APP_HOST}/games/MultihandBlackjack/FUN/arstoiearnst`};
+            console.log( data, ' Err data')
+            // redirectToGame(data);
         });
     }
 
     switch (message.msgId) {
         case GET_EVENTS.LAUNCH:
             console.log(message.keysAndValues, 'post message: launch event');
-            redirectGame(message);
+            fetchGameUrl(message);
             break;
         case GET_EVENTS.CUSTOM:
             console.log('custom event')
