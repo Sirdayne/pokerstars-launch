@@ -34,7 +34,9 @@ function onCasinoMessage(eventData) {
             body: JSON.stringify(body)
         }).then(res => res.json()).then(data => {
             console.log(data, ' DATA from Pokerstars launch');
-        })
+        }).catch((error) => {
+            console.log('Fetch Error: ', error)
+        });
     }
 
     switch (message.msgId) {
